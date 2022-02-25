@@ -4,53 +4,28 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import pro.sky.java.course2.consumergoodsbasket.data.Basket;
+import pro.sky.java.course2.consumergoodsbasket.service.BasketService;
 
 import java.util.List;
 
-@RequestMapping("/store/order")
+@RequestMapping("/order")
 @RestController
 public class BasketController {
 
+    private final BasketService basketService;
+
+    public BasketController(BasketService basketService) {
+        this.basketService = basketService;
+    }
 
     @GetMapping("/add")
     public List<Integer> addIds(
             @RequestParam List<Integer> id) {
-        return id;
+        return basketService.add(id);
     }
 
     @GetMapping("/get")
     public List<Integer> getIds() {
-        return getItems();
+        return basketService.get();
     }
-
-
-
-
-
-/*    @GetMapping("/add")
-    public List<Integer> addIds(
-            @RequestParam List<Integer> id) {
-        return basket.addIds(id);
-    }*/
-
-/*    @GetMapping("/get")
-    public Basket getIds() {
-        return items;
-    }*/
-
-
-
-/*    @GetMapping("/add")
-    public List addSeveralIds(
-            @RequestParam List<Integer> ids) {
-        return basketServiceImpl.addSeveralIds(ids);
-    }*/
-
-
-    /*    @GetMapping("/add")
-        public List addId(
-                @RequestParam int id) {
-            return items.addId(id);
-        }*/
 }
